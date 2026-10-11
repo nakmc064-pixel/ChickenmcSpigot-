@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,8 +28,12 @@ jobs:
     - name: Build Spigot 1.21.11
       run: java -jar BuildTools.jar --rev 1.21.11
 
-    - name: Upload Spigot JAR
-      uses: actions/upload-artifact@v4
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
       with:
-        name: ChickenMCSpigot-1.21.11
+        tag_name: v1.21.11
+        name: ChickenMCSpigot 1.21.11
+        files: spigot-*.jar
+        draft: false
+        prerelease: false1.21.11
         path: spigot-*.jar
